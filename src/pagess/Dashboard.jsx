@@ -69,65 +69,91 @@ const Dashboard = () => {
     <>
       <Navbar />
       {summaryOrder.overview !== undefined ? (
-        <div className="d-flex justify-content-evenly pt-5">
+        <div className="d-flex justify-content-center flex-wrap pt-5 Container-dash">
           <div
-            className="border-start text-start ps-4"
-            style={{ height: "70vh", width: "25%" }}
+            className="d-flex flex-column align-items-center pt-4"
+            style={{ width: "55rem" }}
           >
-            <p className="fw-semibold text-black-50">Welcome Natalia</p>
-            <h4 className="fw-bolder">Overview shop</h4>
-            <div className="d-flex gap-4 ">
+            <div
+              className="d-flex flex-column align-items-start w-semibold  mb-4"
+              style={{ width: "68%" }}
+            >
+              <p className="text-black-50 ms-3 ">Welcome Natalia</p>
+              <h1 className="ms-3 ">Overview Shop</h1>
+            </div>
+            <div
+              className="d-flex justify-content-center flex-wrap"
+              style={{ width: "100%" }}
+            >
               <div
-                className="border border-secondary text-bg-warning bg-opacity-10 rounded-4 p-2"
-                style={{ height: "15vh", width: "7vw" }}
+                className="card text-bg-warning bg-opacity-10 m-2 rounded-4"
+                style={{ width: "12rem", height: "12rem" }}
               >
-                <h6>New orderes</h6>
-                <small className="text-start mt-3 text-muted">
+                <div className="card-body text-start" style={{ width: "7rem" }}>
+                  <h4 className="card-text">New orders</h4>
+                </div>
+                <p className="text-start text-muted ms-3">
                   +5% <i class="fa fa-upload"></i>
-                </small>
-                <p>{summaryOrder.overview.new_orders[0].new_orders}</p>
+                </p>
+                <h4 className="text-start ms-3">
+                  $ {summaryOrder.overview.average_sale[0].average_sale}
+                </h4>
               </div>
+
               <div
-                className="border border-secondary rounded-4 p-2 bg-success p-2 text-dark bg-opacity-25"
-                style={{ height: "15vh", width: "7vw" }}
+                className="card text-bg-secondary bg-opacity-10 m-2 rounded-4"
+                style={{ width: "12rem", height: "12rem" }}
               >
-                <h6>Average sale</h6>
-                <small className="text-start text-muted mt-3">
+                <div className="card-body text-start" style={{ width: "8rem" }}>
+                  <h4 className="card-text text-black">Average sale</h4>
+                </div>
+                <p className="text-start text-muted ms-3">
                   +4.8% <i class="fa fa-upload"></i>
-                </small>
-                <p>${summaryOrder.overview.average_sale[0].average_sale}</p>
+                </p>
+                <h4 className="text-black text-start ms-3">
+                  $ {summaryOrder.overview.new_orders[0].new_orders}
+                </h4>
               </div>
+
               <div
-                className="border border-secondary rounded-4 p-2 bg-success p-2 text-dark bg-opacity-10"
-                style={{ height: "15vh", width: "7vw" }}
+                className="card text-bg-info bg-opacity-10 m-2 rounded-4"
+                style={{ width: "12rem", height: "12rem" }}
               >
-                <h6>Total Earnings</h6>
-                <small className="text-start text-muted mt-3">
+                <div
+                  className="card-body text-start"
+                  style={{ width: "8.5rem" }}
+                >
+                  <h4 className="card-text">Total Earnings</h4>
+                </div>
+                <p className="text-start text-muted ms-3">
                   +3.2% <i class="fa fa-upload"></i>
-                </small>
-                <p>${summaryOrder.overview.total_earnings[0].total_earnings}</p>
+                </p>
+                <h4 className="text-start ms-3">
+                  $ {summaryOrder.overview.total_earnings[0].total_earnings}
+                </h4>
               </div>
             </div>
             <div
-              className="border border-secondary d-flex justify-content-around  rounded-4 p-2 mt-4 text-bg-secondary bg-opacity-10 "
-              style={{ height: "40vh", width: "23rem" }}
+              className="d-flex justify-content-around text-bg-secondary  rounded-4 p-4 mt-4"
+              style={{ width: "95%", height: "50vh" }}
             >
               <div
-                className="text-bg-secondary bg-opacity-10 rounded-4 overflow-hidden"
+                className="text-bg-secondary bg-opacity-10 overflow-hidden rounded-4"
                 style={{ width: "5%", height: "100%" }}
               >
-                {accending().map((i) => {
+                {accending().map((e) => {
                   return (
                     <div
                       className="opacity-75"
                       style={{
-                        backgroundColor: `${colorsfun(i.order_status)}`,
-                        height: `${lengthcolor(i.count)}%`,
+                        height: `${lengthcolor(e.count)}%`,
+                        backgroundColor: `${colorsfun(e.order_status)}`,
                       }}
                     ></div>
                   );
                 })}
               </div>
+
               <div
                 className="d-flex flex-column justify-content-between m-1"
                 style={{ width: "85%" }}
@@ -157,7 +183,7 @@ const Dashboard = () => {
                           ></i>
                         </p>
                         <div
-                          className="d-flex justify-content-between ms-3 align-items-center"
+                          className="d-flex justify-content-between align-items-center"
                           style={{ width: "90%" }}
                         >
                           <h5 className="text-dark m-1">{e.order_status}</h5>
@@ -168,32 +194,33 @@ const Dashboard = () => {
                   })}
               </div>
             </div>
-              <div className="ms-1" style={{ width: "150%"}}>
-                <div className="d-flex justify-content-between align-items-center mb-4">
-                  <div
-                    className="d-flex justify-content-between ms-1"
-                    style={{ width: "10rem" }}
-                  >
-                    <h5>Revenue</h5>
-                    <h5>Orders</h5>
-                  </div>
-                  <select
-                    class="form-select me-2"
-                    aria-label="Default select example"
-                    style={{ width: "8.5rem" }}
-                  >
-                    <option selected>Last 7 Days</option>
-                    <option value="1">Last Month</option>
-                    <option value="2">Last Year</option>
-                    <option value="3">Last 3 Year</option>
-                  </select>
+            
+            <div className="mt-5" style={{ width: "95%" }}>
+              <div className="d-flex justify-content-between align-items-center mb-4">
+                <div
+                  className="d-flex justify-content-between ms-1"
+                  style={{ width: "10rem" }}
+                >
+                  <h5>Revenue</h5>
+                  <h5>Orders</h5>
                 </div>
-                <Chart data={ordersDays} />
+                <select
+                  class="form-select me-2"
+                  aria-label="Default select example"
+                  style={{ width: "8.5rem" }}
+                >
+                  <option selected>Last 7 Days</option>
+                  <option value="1">Last Month</option>
+                  <option value="2">Last Year</option>
+                  <option value="3">Last 3 Year</option>
+                </select>
               </div>
+              <Chart data={ordersDays} />
             </div>
+          </div>
           <div
-            className="border border-2"
-            style={{ height: "fit-content", width: "40%" }}
+            className=" pt-4 text-bg-secondary  rounded-4 responsive-orders"
+            style={{ width: "100vw" }}
           >
             <div className="text-start p-4">
               <h4 className="fw-bolder">Latest Orders</h4>
@@ -204,22 +231,24 @@ const Dashboard = () => {
                 >
                   <i className="fa fa-filter" style={{ fontSize: "24px" }}></i>
                 </button>
-                <select
-                  onClick={(e) => setFilterValue(e.target.value)}
-                  className="form-select border-0"
-                  id="inputGroupSelect03"
-                  aria-label="Example select with button addon"
-                  style={{ height: "6vh" }}
-                >
-                  <option selected value="Choose...">
-                    Choose...
-                  </option>
-                  <option value="in delivery">in delivery</option>
-                  <option value="refund">refund</option>
-                  <option value="processing">processing</option>
-                  <option value="delivered">delivered</option>
-                  <option value="cancelled">cancelled</option>
-                </select>
+                <div style={{width:"90%"}}>
+                  <select
+                    onClick={(e) => setFilterValue(e.target.value)}
+                    className="form-select border-0"
+                    id="inputGroupSelect03"
+                    aria-label="Example select with button addon"
+                    style={{ height: "6vh" }}
+                  >
+                    <option selected value="Choose...">
+                      Choose...
+                    </option>
+                    <option value="in delivery">in delivery</option>
+                    <option value="refund">refund</option>
+                    <option value="processing">processing</option>
+                    <option value="delivered">delivered</option>
+                    <option value="cancelled">cancelled</option>
+                  </select>
+                </div>
               </div>{" "}
               <div className="m-3 d-flex justify-content-between text-black">
                 <span className="m-3">Date</span>
